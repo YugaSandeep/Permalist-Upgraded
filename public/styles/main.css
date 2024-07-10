@@ -1,0 +1,12 @@
+html {
+    min-height: 1000px;
+    background-image: -webkit-linear-gradient(50deg, rgb(141, 206, 243) 50%, rgb(243, 243, 200) 50%);
+}
+
+body {
+    text-align: center;
+    background-color: azure;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}

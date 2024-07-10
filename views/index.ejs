@@ -1,0 +1,51 @@
+<%- include('partials/header.ejs'); -%>
+<div class="mainContainer">
+    <div class="box">
+        <h1 class="heading">
+            <%= listTitle %>
+        </h1>
+    </div>
+    <div class="box">
+        <!-- <fieldset> -->
+        <% for(let item of listItems) { %>
+        <div class="item">
+            <form action="/delete" method="post">
+                <input onchange="this.form.submit()" type="checkbox" name="deletedItemId" value="<%= item.id %>">
+            </form>
+    
+            <p id="title<%=item.id%>">
+                <%= item.title %>
+            </p>
+    
+            <form action="/edit" method="post">
+                <input hidden="true" name="updatedItemId" value="<%= item.id %>">
+                <input id="input<%= item.id %>" type="text" name="updatedItemTitle" 
+                    value="<%= item.title %>" hidden="true" autocomplete="off">
+                <button id="done<%= item.id %>" type="submit" class="edit" hidden="true"><img class="icon"
+                    src="assets/icons/check-solid.svg" alt="tick image">
+                </button>
+            </form>
+
+            <button id="edit<%= item.id %>" class="edit" onclick="handler('<%=item.id%>')"><img class="icon"
+                src="/assets/icons/pencil-solid.svg" alt="pencil image">
+            </button>
+        </div>
+        <% } %>
+        <form class="item" action="/add" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+            <button class="add">+</button>
+        </form>
+        <!-- </fieldset> -->
+    </div>
+</div>
+</div>
+    <script>
+        function handler(id) {
+            console.log("hellooo");
+            document.getElementById('title'+id).setAttribute("hidden", "true");
+            document.getElementById('edit'+id).setAttribute("hidden", "true");
+            document.getElementById('input'+id).removeAttribute("hidden");
+            document.getElementById('done'+id).removeAttribute("hidden");
+        }
+    </script>
+<%- include('partials/footer.ejs'); -%>
